@@ -15,11 +15,10 @@ function initWatchListView() {
         if (isListView) {
             let marketEl = mainContentEl.querySelector('.table-body.market');
             let tabletRowEls = marketEl.querySelectorAll('.table-body .table-row');
-            tabletRowEls.forEach((el, index) => {
+            tabletRowEls.forEach((el) => {
                                  if (el.className.indexOf('empty') !== -1) {
                                  return;
                                  }
-                                 let cellNameEl = el.querySelector('.table-name-cell');
                                  let tableInfoEl = el.querySelector('.table-info');
                                  let sellBtnEl = tableInfoEl.querySelector('.etoro-sell-button');
                                  let buyBtnEl = tableInfoEl.querySelector('.etoro-buy-button');
@@ -28,11 +27,11 @@ function initWatchListView() {
                                  }
                                  let sellPrice = sellBtnEl.querySelector('.etoro-price-value').textContent.trim();
                                  let buyPrice = buyBtnEl.querySelector('.etoro-price-value').textContent.trim();
-                                 createSpreadColumn(tableInfoEl, sellPrice, buyPrice);
+                                 createSpreadColumn(tableInfoEl, buyPrice, sellPrice);
                                  });
         } else {
             let cardListEls = mainContentEl.querySelectorAll('.market-card-ph.pointer');
-            cardListEls.forEach((cardEl, index) => {
+            cardListEls.forEach((cardEl) => {
                                 let btnSellEl = cardEl.querySelector('.etoro-sell-button');
                                 let btnBuyEl = cardEl.querySelector('.etoro-buy-button');
                                 if (!btnBuyEl || !btnSellEl) {
@@ -41,7 +40,7 @@ function initWatchListView() {
                                 let sellPrice = btnSellEl.querySelector('.etoro-price-value').textContent.trim();
                                 let buyPrice = btnBuyEl.querySelector('.etoro-price-value').textContent.trim();
                                 let marketHeadEl = cardEl.querySelector('.market-card-head');
-                                createSpreadColumn(marketHeadEl, sellPrice, buyPrice);
+                                createSpreadColumn(marketHeadEl, buyPrice, sellPrice);
                                 });
         }
     } catch (e) {
@@ -53,7 +52,7 @@ function initialPortfolioOverview() {
     try {
         let portfolioEl = document.querySelector('.main-app-view .p-portfolio .portfolio-overview');
         let tabletRowEls = portfolioEl.querySelectorAll('.ui-table-row-container');
-        tabletRowEls.forEach((el, index) => {
+        tabletRowEls.forEach((el) => {
                              if (el.className.indexOf('empty') !== -1) {
                              return;
                              }
@@ -65,7 +64,7 @@ function initialPortfolioOverview() {
                              }
                              let sellPrice = sellBtnEl.querySelector('.etoro-price-value').textContent.trim();
                              let buyPrice = buyBtnEl.querySelector('.etoro-price-value').textContent.trim();
-                             createSpreadColumn(cellNameEl, sellPrice, buyPrice);
+                             createSpreadColumn(cellNameEl, buyPrice, sellPrice);
                              });
     } catch (e) {
         console.log(e);
@@ -134,7 +133,7 @@ function updatePrice() {
 
 function cleanSentiment() {
     let sentimentElements = document.querySelectorAll('.main-app-view .sentiment');
-    sentimentElements.forEach((element, index) => {
+    sentimentElements.forEach((element) => {
                               element.classList.remove('sentiment');
                               });
 }
@@ -176,9 +175,9 @@ function getOptions() {
     };
 }
 
-window.addEventListener("DOMContentLoaded", function(event) {
-                        var doc = event.target;
-                        var win = doc.defaultView;
+document.addEventListener("DOMContentLoaded", function(event) {
+                        let doc = event.target;
+                        let win = doc.defaultView;
                         if (win.frameElement) return;
                         console.log('starting');
                         start();
